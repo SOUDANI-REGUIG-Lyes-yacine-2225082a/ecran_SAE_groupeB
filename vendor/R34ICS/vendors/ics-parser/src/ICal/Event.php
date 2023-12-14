@@ -137,6 +137,13 @@ class Event
      */
     protected function prepareData($value)
     {
+        
+        if (is_string($value)) {
+        // Suppression des nombres de 13 chiffres dans la description
+        if ($value === $this->description) {
+            $value = preg_replace('/\b\d{13}\b/', '', $value);
+        }
+            
         if (is_string($value)) {
             return stripslashes(trim(str_replace('\n', "\n", $value)));
         } elseif (is_array($value)) {
